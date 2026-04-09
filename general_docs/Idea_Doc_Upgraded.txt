@@ -1,0 +1,21 @@
+Project Idea / Solution Statement Upgraded:
+
+This project presents a database-centric, AI-integrated adaptive study assistant that enables students to generate reliable, syllabus-aligned, and exam-ready answers from their own academic materials. The system is designed with a normalized relational database as its core, supporting structured storage, retrieval, and analysis of academic content, while a Retrieval-Augmented Generation (RAG) layer operates as an intelligent query interface on top of this database.
+
+The system ingests student-uploaded documents (lecture notes, assignments, and handouts), organizes them into version-controlled document collections, and decomposes them into semantically meaningful chunks. These chunks are stored with metadata such as page references, topics, and embeddings generated using sentence-transformers, and indexed within PostgreSQL using the pgvector extension for efficient similarity search.
+
+To improve retrieval accuracy and efficiency, the system implements a hybrid retrieval strategy, combining vector-based semantic search with keyword indexing, followed by reranking. Additionally, a query caching mechanism stores previously computed results to reduce redundant computation and improve response time.
+
+A key innovation lies in the system’s structured knowledge modeling:
+
+A topic extraction layer maps chunks to explicit topics, enabling fine-grained querying and analytics.
+A many-to-many citation tracking system links generated answers to their exact source chunks with relevance scores, ensuring explainability.
+A versioning system tracks document evolution, enabling reproducible retrieval and temporal comparisons.
+
+The system also introduces user-adaptive learning features, where a user-topic profile tracks confidence levels across subjects based on interaction history and feedback. A feedback loop mechanism allows users to rate answers, which is stored and used to improve retrieval quality and adjust user understanding.
+
+To ensure reliability, the answer generation process is governed by a controlled and grounded generation framework, where outputs must adhere to predefined structural constraints based on difficulty levels (foundational, intermediate, advanced) and are restricted to retrieved document content with explicit citations.
+
+Finally, the system includes an evaluation and analytics layer that measures answer relevance, grounding accuracy, and user performance trends, enabling both system validation and personalized learning insights.
+
+Overall, this project demonstrates a hybrid database architecture that integrates relational design, vector search, and adaptive intelligence, moving beyond traditional RAG systems by emphasizing data integrity, traceability, performance optimization, and user-centric adaptation within a DBMS framework.
