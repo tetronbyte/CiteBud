@@ -234,13 +234,6 @@ The file `queries/queries.sql` contains 10 labelled queries demonstrating:
 
 ---
 
-## AI Usage Disclosure
-
-- **Claude Code** (Anthropic): Used for code generation assistance, query design, and documentation drafting. All generated code was reviewed, tested, and adapted.
-- **Sentence-transformers**: Used programmatically to generate real embeddings for chunk data (not for content generation).
-
----
-
 ## License
 
 Academic project — not for redistribution.
