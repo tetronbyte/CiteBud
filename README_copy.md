@@ -1,5 +1,7 @@
 # CiteBud — Adaptive Study Assistant
 
+**GitHub Repository:** https://github.com/tetronbyte/CiteBud
+
 A database-centric adaptive study assistant built on a RAG (Retrieval-Augmented Generation) pipeline. Students upload academic documents which are chunked, embedded, and stored in PostgreSQL with pgvector. The system generates grounded, citation-backed answers at three difficulty levels with query caching and per-student topic confidence tracking.
 
 **Track:** A (RAG Pipeline)
