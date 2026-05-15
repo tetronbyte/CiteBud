@@ -326,12 +326,16 @@ def main():
     print(f"Generating {NUM_DOCUMENTS} documents...")
     documents = []
     doc_id = 0
-    for i in range(NUM_DOCUMENTS):
-        doc_id += 1
+    seen_doc_keys = set()
+    while doc_id < NUM_DOCUMENTS:
         student_id = random.randint(1, NUM_STUDENTS)
         course_code, course_name = random.choice(COURSES)
         week = random.randint(1, 14)
         title = f"{course_name} - Week {week} Notes"
+        if (student_id, title) in seen_doc_keys:
+            continue
+        seen_doc_keys.add((student_id, title))
+        doc_id += 1
         created = random_timestamp(start_date + timedelta(days=30), end_date - timedelta(days=60))
         documents.append((doc_id, student_id, title, course_code, created))
 
@@ -463,15 +467,21 @@ def main():
     # ─── 7. Solutions ────────────────────────────────────────────────────
     print(f"Generating {NUM_SOLUTIONS} solutions...")
     solutions = []
-    for i in range(1, NUM_SOLUTIONS + 1):
+    seen_sol_keys = set()
+    sol_i = 0
+    while sol_i < NUM_SOLUTIONS:
         topic_name = random.choice(TOPIC_NAMES[:NUM_TOPICS])
         question = random.choice(QUESTION_TEMPLATES).format(topic=topic_name)
         q_hash = sha256(question)
         difficulty = random.choice(DIFFICULTIES)
+        if (q_hash, difficulty) in seen_sol_keys:
+            continue
+        seen_sol_keys.add((q_hash, difficulty))
+        sol_i += 1
         answer = f"Based on the retrieved source materials, here is a {difficulty}-level explanation of {topic_name}: {random.choice(CHUNK_TEMPLATES.get(topic_name, CHUNK_TEMPLATES['Binary Search Trees']))}"
         model_name = random.choice(["gpt-4o-mini", "gpt-4o", "claude-3-haiku"])
         generated = random_timestamp(start_date + timedelta(days=60), end_date)
-        solutions.append((i, q_hash, difficulty, answer, model_name, generated, question))
+        solutions.append((sol_i, q_hash, difficulty, answer, model_name, generated, question))
 
     sql_lines.append("-- Solutions")
     for s in solutions:
